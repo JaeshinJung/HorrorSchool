@@ -22,13 +22,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask interactableLayer;    // 상호작용 가능한 레이어
     [SerializeField] private TextMeshProUGUI interactionPromptUI; // 상호작용 UI 텍스트
 
-
+    // 기본 움직임 변수들
     private CharacterController controller;
     private PlayerAnimator animator;
     private IInputHandler keyboardHandler;
     private IInputHandler mouseHandler;
     private Vector3 velocity;
     private float xRotation = 0f;
+    private IInteractable currentInteractable; // 현재 바라보고 있는 상호작용 오브젝트
 
     private void Awake()
     {
@@ -55,8 +56,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Debug Log - PlayerController.cs / Awake() / mouseHandler 참조 실패");
         }
 
+        // 상호작용 UI꺼져있는지 확인
         if (interactionPromptUI != null)
             interactionPromptUI.gameObject.SetActive(false);
+    }
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
@@ -118,5 +126,39 @@ public class PlayerController : MonoBehaviour
         // 카메라의 위치와 방향에서 Ray 생성
         Ray ray = new Ray(Eyes.position, Eyes.forward);
 
+        // Raycast를 쏴서 interactabl Layer에 있는 오브젝트만 감지
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactionDistance, interactableLayer))
+        {
+            // Ray에 맞은 오브젝트에서 IInteractable 컴포넌트를 가져온다
+            if (hitInfo.collider.TryGetComponent(out IInteractable interactable))
+            {
+                currentInteractable = interactable;
+                // UI 텍스트 설정
+                interactionPromptUI.text = interactable.GetInteractPrompt();
+                // UI 텍스트 활성화
+                interactionPromptUI.gameObject.SetActive(true);
+
+                // 이떄 상호작용 키가 눌렸는지 확인
+                if (keyboardHandler.IsInteractionPressed() || mouseHandler.IsInteractionPressed())
+                {
+                    //ProcessInteraction();
+                }
+                return;
+            }
+        }
+        // Ray에 아무것도 맞지 않았다면 UI를 끔
+        interactionPromptUI.gameObject.SetActive(false);
+     }
+
+    private void ProcessInteraction()
+    {
+        if (currentInteractable == null) return;
+
+        // Door라면
+        if (currentInteractable is Door doorComponent)
+        {
+            //GameManager.instance
+        }
     }
 }
+
