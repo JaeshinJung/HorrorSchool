@@ -16,7 +16,7 @@ public class Anomaly
 public class GameManager : Singleton<GameManager>
 {
     [Header("Game Objects")]
-    public CharacterController playerController;
+    public PlayerController playerController;
     public Transform playerStartPoint;
     public Anomaly[] anomalies; // 이상현상들
 
@@ -34,16 +34,12 @@ public class GameManager : Singleton<GameManager>
 
     protected override void DoAwake()
     {
-        base.DoAwake();
         // GameManager가 시작될때 필요한 초기화 로직이 있다면 여기에 작성...
     }
 
     private void Start()
     {
-        playerController.enabled = false;
-        playerController.transform.position = playerStartPoint.position;
-        playerController.enabled = true;
-
+        playerController.ResetPositionAndRotation(playerStartPoint.position, playerStartPoint.rotation);
         SetupNewRoom();
     }
 
@@ -100,11 +96,12 @@ public class GameManager : Singleton<GameManager>
         UpdateUI();
     }
 
-    public void ProcessPlayerChoice(Door.DoorType chosenDoor)
+    public void PlayerChoseDirection(ChoiceTrigger.Direction chosenDirection)
     {
-        if (chosenDoor == Door.DoorType.None) return;
-        bool correctChoice = (isAnomalyActive && chosenDoor == Door.DoorType.Front) ||
-                             (!isAnomalyActive && chosenDoor == Door.DoorType.Back);
+        // 새로운 규칙: 이상 현상 있으면 뒤로(Backward), 없으면 앞으로(Forward)가 정답
+        bool correctChoice = (isAnomalyActive && chosenDirection == ChoiceTrigger.Direction.Backward) ||
+                             (!isAnomalyActive && chosenDirection == ChoiceTrigger.Direction.Forward);
+
         if (correctChoice)
         {
             currentStreak++;
@@ -113,14 +110,21 @@ public class GameManager : Singleton<GameManager>
         else
         {
             currentStreak = 0;
-            Debug.Log("오답! 처음부터 다시 시작합니다.");
+            Debug.Log("오답! 기록이 초기화됩니다.");
         }
+
         if (currentStreak >= winCondition)
         {
             Debug.Log("탈출 성공! 게임 클리어!");
             this.enabled = false;
             return;
         }
+
+        // 플레이어 위치와 시점을 시작 지점으로 리셋
+        playerController.ResetPositionAndRotation(playerStartPoint.position, playerStartPoint.rotation);
+
+        // 다음 방(루프) 준비
+        SetupNewRoom();
     }
 
     void UpdateUI()

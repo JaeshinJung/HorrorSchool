@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimator animator;
     private IInputHandler keyboardHandler;
     private IInputHandler mouseHandler;
+
     private Vector3 velocity;
     private float xRotation = 0f;
     private IInteractable currentInteractable; // 현재 바라보고 있는 상호작용 오브젝트
@@ -130,7 +131,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitInfo, interactionDistance, interactableLayer))
         {
             // Ray에 맞은 오브젝트에서 IInteractable 컴포넌트를 가져온다
-            if (hitInfo.collider.TryGetComponent(out IInteractable interactable))
+            if (hitInfo.collider.GetComponentInParent<IInteractable>() is IInteractable interactable)
             {
                 currentInteractable = interactable;
                 // UI 텍스트 설정
@@ -141,24 +142,35 @@ public class PlayerController : MonoBehaviour
                 // 이떄 상호작용 키가 눌렸는지 확인
                 if (keyboardHandler.IsInteractionPressed() || mouseHandler.IsInteractionPressed())
                 {
-                    //ProcessInteraction();
+                    ProcessInteraction();
                 }
                 return;
             }
         }
         // Ray에 아무것도 맞지 않았다면 UI를 끔
         interactionPromptUI.gameObject.SetActive(false);
+        currentInteractable = null;
      }
 
     private void ProcessInteraction()
     {
         if (currentInteractable == null) return;
+        currentInteractable.Interact();
+    }
 
-        // Door라면
-        if (currentInteractable is Door doorComponent)
-        {
-            //GameManager.instance
-        }
+    public void ResetPositionAndRotation(Vector3 postion, Quaternion rotation)
+    {
+        controller.enabled = false;
+
+        transform.position = postion;
+        transform.rotation = rotation;
+
+        xRotation = 0f;
+        Eyes.localRotation = Quaternion.identity;
+
+        velocity = Vector3.zero;
+
+        controller.enabled = true;
     }
 }
 
