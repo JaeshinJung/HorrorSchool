@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4343469102607976}
   - component: {fileID: 33218900247378062}
   - component: {fileID: 23072247148951056}
-  - component: {fileID: 9166795263203117106}
+  - component: {fileID: 9688667950907580}
   m_Layer: 7
   m_Name: Cube_10
   m_TagString: Untagged
@@ -167,7 +167,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &9166795263203117106
+--- !u!65 &9688667950907580
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 5183035913036189501}
   - component: {fileID: 5831887903860617213}
   m_Layer: 0
-  m_Name: FrontDoor
+  m_Name: BackDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,15 +214,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1965528337302418}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -6.807, y: 0, z: 8.037}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.526, y: 0, z: 8.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4556694855844174}
   - {fileID: 5830047158970422527}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5183035913036189501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +245,7 @@ Animator:
   m_GameObject: {fileID: 1965528337302418}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0201a76c50f97c842bb54ce3c2eda7ca, type: 2}
+  m_Controller: {fileID: 9100000, guid: 34a830d6d88fa8b478df82f52aac52c2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

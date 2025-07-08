@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1252095035663296290}
   - component: {fileID: 5358679974803952715}
   - component: {fileID: 3417643950197420533}
-  - component: {fileID: 3289732571944230128}
+  - component: {fileID: -2651098835510151766}
   m_Layer: 0
   m_Name: NLocker
   m_TagString: Untagged
@@ -84,14 +84,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3289732571944230128
-MeshCollider:
+--- !u!65 &-2651098835510151766
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6360185384271890920}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 2681a346aec0a5b4eb0181ae6e68012a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -102,7 +102,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: a009d4148ee08684d917c68693f75228, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 0.82435536, y: 0.64784634, z: 0.44563955}
+  m_Center: {x: 0.01878491, y: 0.33486974, z: 0.025237478}

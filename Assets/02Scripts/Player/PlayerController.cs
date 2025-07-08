@@ -30,7 +30,9 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 velocity;
     private float xRotation = 0f;
+    private bool isViewInitialized = false;
     private IInteractable currentInteractable; // 현재 바라보고 있는 상호작용 오브젝트
+    private Vector3 hitNormal;
 
     private void Awake()
     {
@@ -64,8 +66,17 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(InitializeViewRoutine());
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private IEnumerator InitializeViewRoutine()
+    {
+        yield return new WaitForEndOfFrame();
+
+        isViewInitialized = true;
     }
 
     private void Update()
@@ -89,17 +100,19 @@ public class PlayerController : MonoBehaviour
             velocity.y = -2f; // 땅에 더 잘 붙어있게
         }
         var keyInput = keyboardHandler.GetMovementInput();
-
         // 캐릭터 이동
-        Vector3 dir = transform.right * keyInput.x + transform.forward * keyInput.y;
-        if (dir.magnitude >= 0.1f) // 입력값이 0이 아니라면
+        Vector3 move = transform.right * keyInput.x + transform.forward * keyInput.y;
+
+        if (Vector3.Dot(move, hitNormal) < 0)
         {
-            animator.SetMovementAnims(true);
-            controller.Move(dir * (moveSpeed * Time.deltaTime));
+            move = move - hitNormal * Vector3.Dot(move, hitNormal);
         }
-        else
+
+        controller.Move(move * moveSpeed * Time.deltaTime);
+
+        if (animator != null)
         {
-            animator.SetMovementAnims(false);
+            animator.SetMovementAnims(move.magnitude > 0.1f);
         }
 
         // 중력 적용
@@ -109,16 +122,27 @@ public class PlayerController : MonoBehaviour
 
     private void HandleLook()
     {
+        if (!isViewInitialized) return;
+
         var lookInput = mouseHandler.GetMovementInput();
+
+        float rawMouseY = lookInput.y;
+
+        // 0이 아닐 때만 로그를 찍어 콘솔 창이 너무 지저분해지는 것을 방지합니다.
+        if (rawMouseY != 0)
+        {
+            Debug.Log($"Mouse Y Input: {rawMouseY},  Before Change xRotation: {xRotation}");
+        }
 
         // 좌우 회전
         float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
         transform.Rotate(Vector3.up * mouseX);
 
-        // 캐릭터 시점 상하 회전
-        float mouseY = lookInput.y * mouseSensitivity * 1.5f * Time.deltaTime;
-        xRotation -= mouseY;
+        // 실제 시점 회전 계산
+        float finalMouseY = rawMouseY * mouseSensitivity * Time.deltaTime;
+        xRotation -= finalMouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
         Eyes.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
     }
 
@@ -171,6 +195,11 @@ public class PlayerController : MonoBehaviour
         velocity = Vector3.zero;
 
         controller.enabled = true;
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        hitNormal = hit.normal;
     }
 }
 
