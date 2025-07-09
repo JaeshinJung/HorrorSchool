@@ -128,12 +128,6 @@ public class PlayerController : MonoBehaviour
 
         float rawMouseY = lookInput.y;
 
-        // 0이 아닐 때만 로그를 찍어 콘솔 창이 너무 지저분해지는 것을 방지합니다.
-        if (rawMouseY != 0)
-        {
-            Debug.Log($"Mouse Y Input: {rawMouseY},  Before Change xRotation: {xRotation}");
-        }
-
         // 좌우 회전
         float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime;
         transform.Rotate(Vector3.up * mouseX);

@@ -6570,7 +6570,7 @@ Transform:
   m_GameObject: {fileID: 1261050859}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -8.84, y: 1.687, z: 5.598}
+  m_LocalPosition: {x: -8.84, y: 1.31, z: 5.598}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7338,32 +7338,32 @@ MonoBehaviour:
   anomalies:
   - spawnPoint: {fileID: 909988790}
     normalPrefab: {fileID: 8518745107967928895, guid: d709cad4b1d00244c95707503b68a8b2, type: 3}
-    anomalyPrefab: {fileID: 0}
+    anomalyPrefab: {fileID: 8518745107967928895, guid: a4936e7fa582f884bad1247c920a458a, type: 3}
   - spawnPoint: {fileID: 1261050860}
     normalPrefab: {fileID: 8531893352310622089, guid: 8b37726bc7d57e042b1e245490544df8, type: 3}
-    anomalyPrefab: {fileID: 0}
+    anomalyPrefab: {fileID: 8531893352310622089, guid: 104191e0e494adb4085f59dd5cbffd07, type: 3}
   - spawnPoint: {fileID: 334773423}
     normalPrefab: {fileID: 4624749332640086035, guid: f2b663f768eedbc41aa9bbda2de906e2, type: 3}
-    anomalyPrefab: {fileID: 0}
+    anomalyPrefab: {fileID: 4624749332640086035, guid: b78d3f6ad30c46b44ae8101526125483, type: 3}
   - spawnPoint: {fileID: 1863954783}
     normalPrefab: {fileID: 2309714654117279029, guid: f388ae1999fd78c459178d178bc867e8, type: 3}
-    anomalyPrefab: {fileID: 0}
+    anomalyPrefab: {fileID: 2309714654117279029, guid: ac0884b6b74bfc541bff6da066f029f3, type: 3}
   - spawnPoint: {fileID: 1786291617}
     normalPrefab: {fileID: 2570830480614499128, guid: f5cbc33bb83d28d4d85a2ef08692e3e7, type: 3}
-    anomalyPrefab: {fileID: 0}
+    anomalyPrefab: {fileID: 2570830480614499128, guid: fdea1d63b6c727b449497c9223f9d561, type: 3}
   - spawnPoint: {fileID: 852663707}
     normalPrefab: {fileID: 2126746142026007117, guid: 88ae167abb6d0934fa6ab7a0bbc05fb5, type: 3}
-    anomalyPrefab: {fileID: 0}
+    anomalyPrefab: {fileID: 2126746142026007117, guid: 87e72c38fa3f5fc409244c4cc80077c1, type: 3}
   - spawnPoint: {fileID: 806981907}
     normalPrefab: {fileID: 6360185384271890920, guid: f2613181a546a944ebcbc3aa244e4f56, type: 3}
-    anomalyPrefab: {fileID: 0}
+    anomalyPrefab: {fileID: 6360185384271890920, guid: f9a99eb670a314e4c82967309141e997, type: 3}
   - spawnPoint: {fileID: 1359646173}
     normalPrefab: {fileID: 1288930746287751054, guid: 54117a51e673d7e48ac1336c32230018, type: 3}
-    anomalyPrefab: {fileID: 0}
+    anomalyPrefab: {fileID: 1288930746287751054, guid: ac6a209501a83cc4687887808c5cb71e, type: 3}
   - spawnPoint: {fileID: 1628912829}
     normalPrefab: {fileID: 1103706782783383739, guid: 0a30b955ff29fe54c8494cd2ae4673d4, type: 3}
-    anomalyPrefab: {fileID: 0}
-  anomalyChance: 0.5
+    anomalyPrefab: {fileID: 1103706782783383739, guid: 334e155f179862e4dae0ccd886748381, type: 3}
+  anomalyChance: 0.75
   winCondition: 8
   streakText: {fileID: 0}
 --- !u!4 &1463226582
