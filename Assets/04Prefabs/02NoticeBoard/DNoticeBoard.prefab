@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 7956335126761175384}
   - component: {fileID: 8918848191972275436}
   - component: {fileID: -1182656924115495842}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DNoticeBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}

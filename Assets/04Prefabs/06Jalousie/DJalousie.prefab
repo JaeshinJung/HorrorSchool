@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2263991563965778582}
   - component: {fileID: 477333236648548716}
   - component: {fileID: 2861574691347490504}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DJalousie
   m_TagString: Untagged
   m_Icon: {fileID: 0}

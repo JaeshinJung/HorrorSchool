@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4981053830125797442}
   - component: {fileID: 1569550340698064861}
   - component: {fileID: 997133314364868947}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DBook
   m_TagString: Untagged
   m_Icon: {fileID: 0}

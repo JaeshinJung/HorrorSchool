@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6161388601343661515}
   - component: {fileID: 6905357471447561672}
   - component: {fileID: 2739400633071964820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DCleaningLocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

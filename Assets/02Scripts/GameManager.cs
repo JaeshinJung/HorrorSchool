@@ -25,7 +25,7 @@ public class GameManager : Singleton<GameManager>
     public int winCondition = 8; // 탈출에 필요한 연속 정답 횟수
 
     [Header("UI")]
-    public TextMeshProUGUI streakText; // 연속 정답 횟수를 표시할 UI
+    public TextMeshPro[] streakTexts; // 연속 정답 횟수를 표시할 UI
     private bool isAnomalyActive; // 현재 방에 이상현상이 있는지 여부
     private int currentStreak = 0; // 현재 연속 정답 횟수
 
@@ -129,7 +129,14 @@ public class GameManager : Singleton<GameManager>
 
     void UpdateUI()
     {
-        if (streakText != null) streakText.text = $"출구: {currentStreak}";
+        // 배열에 있는 모든 텍스트 오브젝트를 순회하며 내용을 변경
+        foreach (var textComponent in streakTexts)
+        {
+            if (textComponent != null)
+            {
+                textComponent.text = $"1-{currentStreak + 1}";
+            }
+        }
     }
 }
 
