@@ -16,6 +16,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float mouseSensitivity = 500f;
     [SerializeField] private Transform Eyes;
 
+    // 사운드 세팅
+    [Header("Audio Setting")]
+    [SerializeField] private AudioClip footstepSound;
+    private AudioSource audioSource;
+    [SerializeField] private float footstepInterval = 0.5f;
+    private float footstepTime = 0f;
+
     // 상호작용 변수 세팅
     [Header("Interaction Setting")]
     [SerializeField] private float interactionDistance = 3f; // 상호작용 가능 거리
@@ -62,6 +69,8 @@ public class PlayerController : MonoBehaviour
         // 상호작용 UI꺼져있는지 확인
         if (interactionPromptUI != null)
             interactionPromptUI.gameObject.SetActive(false);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -102,6 +111,17 @@ public class PlayerController : MonoBehaviour
         var keyInput = keyboardHandler.GetMovementInput();
         // 캐릭터 이동
         Vector3 move = transform.right * keyInput.x + transform.forward * keyInput.y;
+      
+        // 사운드 추가
+        if (controller.isGrounded && move.magnitude > 0.1f)
+        {
+            footstepTime -= Time.deltaTime;
+            if (footstepTime <= 0)
+            {
+                PlayFootstepSound();
+                footstepTime = footstepInterval;
+            }
+        }
 
         if (Vector3.Dot(move, hitNormal) < 0)
         {
@@ -118,6 +138,8 @@ public class PlayerController : MonoBehaviour
         // 중력 적용
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        
     }
 
     private void HandleLook()
@@ -194,6 +216,13 @@ public class PlayerController : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         hitNormal = hit.normal;
+    }
+
+    public void PlayFootstepSound()
+    {
+        // 소리가 단조롭지 않게 피치 변경
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.PlayOneShot(footstepSound);
     }
 }
 
