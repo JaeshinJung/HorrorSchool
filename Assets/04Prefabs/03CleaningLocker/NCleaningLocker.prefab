@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8255248583153320666}
   - component: {fileID: 6161388601343661515}
   - component: {fileID: 6905357471447561672}
-  - component: {fileID: 2739400633071964820}
+  - component: {fileID: 1567154448925948625}
   m_Layer: 0
   m_Name: NCleaningLocker
   m_TagString: Untagged
@@ -84,14 +84,14 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2739400633071964820
+--- !u!65 &1567154448925948625
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4624749332640086035}
-  m_Material: {fileID: 13400000, guid: 2681a346aec0a5b4eb0181ae6e68012a, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
