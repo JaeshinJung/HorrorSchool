@@ -20,6 +20,9 @@ public class GameManager : Singleton<GameManager>
     public Transform playerStartPoint;
     public Anomaly[] anomalies; // 이상현상들
 
+    [Header("UI References")]
+    public Animator ghostUIAnimator; // 씬에 있는 Ghost UI의 애니메이터
+
     [Header("Game Settings")]
     public float anomalyChance = 0.5f; // 이상 현상이 나타날 확률
     public int winCondition = 8; // 탈출에 필요한 연속 정답 횟수
@@ -84,12 +87,18 @@ public class GameManager : Singleton<GameManager>
                 prefabToSpawn = currentSpot.normalPrefab;
             }
 
-
             //선택된 프리팹을 스폰에 소환후 나중에 지울 수 있도록 리스트에 추가
             if (prefabToSpawn != null)
             {
                 GameObject newInstance = Instantiate(prefabToSpawn, currentSpot.spawnPoint);
                 currentRoomInstance.Add(newInstance);
+
+                Monitor monitor = newInstance.GetComponent<Monitor>();
+                if (monitor != null)
+                {
+                    // 이상현상이 모니터라면
+                    monitor.ghostUIAnimator = this.ghostUIAnimator;
+                }
             }
         }
 
