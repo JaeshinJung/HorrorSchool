@@ -85,7 +85,7 @@ MonoBehaviour:
   bloodEffect: {fileID: 8637080668389943426}
   bloodPrint: {fileID: 8328123758485059855}
   bangingSound: {fileID: 8300000, guid: 958408b32ccf3714ea02821877b0870c, type: 3}
-  screamSound: {fileID: 8300000, guid: 2e071f5b8b8467d45a5e6e24c23c6ad4, type: 3}
+  screamSound: {fileID: 8300000, guid: e07acf4be273f6d4d884b12942c8e800, type: 3}
 --- !u!82 &533486525457876800
 AudioSource:
   m_ObjectHideFlags: 0

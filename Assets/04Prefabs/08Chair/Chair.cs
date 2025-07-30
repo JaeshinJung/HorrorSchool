@@ -18,6 +18,21 @@ public class Chair : MonoBehaviour, IInteractable
         audioSource = GetComponent<AudioSource>();
     }
 
+    private void Start()
+    {
+        if (demonDoll != null)
+        {
+            demonDoll.SetActive(false);
+        }
+
+        if (demonHead != null)
+        {
+            demonHead.SetActive(false);
+        }
+
+        StartCoroutine(blinkDoll());
+    }
+
     public string GetInteractPrompt()
     {
         return hasInteracted ? "" : "살펴보기";
@@ -25,6 +40,33 @@ public class Chair : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        throw new System.NotImplementedException();
+        if (hasInteracted) return;
+        
+        hasInteracted = true;
+
+        // 1. 깜빡임 중지
+        StopCoroutine(blinkDoll());
+
+        // 2. 소리재생
+        audioSource.PlayOneShot(horrorSound);
+
+        // 3. 머리 출현
+        if (demonHead != null)
+        {
+            demonHead.SetActive(true);
+        }
+
+    }
+
+    private IEnumerator blinkDoll()
+    {
+        while (!hasInteracted)
+        {
+            demonDoll.SetActive(true);
+            yield return new WaitForSeconds(0.2f);
+
+            demonDoll.SetActive(false);
+            yield return new WaitForSeconds(1f);
+        }
     }
 }

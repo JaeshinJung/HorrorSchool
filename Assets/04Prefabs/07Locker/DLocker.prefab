@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locker: {fileID: 1422804831865976640}
-  horrorSound: {fileID: 0}
+  horrorSound: {fileID: 8300000, guid: e07acf4be273f6d4d884b12942c8e800, type: 3}
 --- !u!82 &7376491779662166352
 AudioSource:
   m_ObjectHideFlags: 0
