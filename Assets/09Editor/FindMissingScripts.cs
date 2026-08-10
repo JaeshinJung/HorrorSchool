@@ -1,3 +1,7 @@
+// "09Editor" is not a Unity special folder (the name must be exactly "Editor"),
+// so this editor-only tool is compiled into the runtime assembly and breaks
+// player builds. Guard it until the file is moved into a real Editor folder.
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -51,3 +55,4 @@ public class FindMissingScripts : EditorWindow
         Debug.Log(string.Format("Searched {0} GameObjects, {1} components, found {2} missing", goCount, componentsCount, missingCount));
     }
 }
+#endif
