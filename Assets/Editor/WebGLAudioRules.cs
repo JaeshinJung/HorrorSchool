@@ -6,8 +6,10 @@ using UnityEditor;
 using UnityEngine;
 
 /// <summary>
-/// Reports and applies WebGL AudioImporter overrides from a rules CSV, so every
-/// per-clip decision is recorded in one auditable input file.
+/// Reports and applies AudioImporter settings from a rules CSV, so every
+/// per-clip decision is recorded in one auditable input file. Settings are
+/// written to defaultSampleSettings because Unity 2022.3 exposes no "WebGL"
+/// audio platform override; see the note in RunApply.
 ///
 /// CSV columns (header required):
 ///   assetPath,loadType,compressionFormat,quality,sampleRateSetting,sampleRateOverride,forceToMono
@@ -22,6 +24,13 @@ using UnityEngine;
 /// </summary>
 public static class WebGLAudioRules
 {
+    // quality is a float that round-trips through the .meta YAML, so it is
+    // compared with a tolerance. The CSV expresses quality in whole percent,
+    // so the smallest difference that can ever be intended is 0.01; 1e-4 is
+    // 100x below that and still ~1000x above float32 noise at this magnitude,
+    // which makes a stuck default of 1.00 against a wanted 0.70 unmissable.
+    private const float QualityEpsilon = 1e-4f;
+
     public static void Report()
     {
         try
@@ -117,9 +126,28 @@ public static class WebGLAudioRules
             s.sampleRateOverride = uint.Parse(f[5], CultureInfo.InvariantCulture);
             s.conversionMode = 0;
 
-            importer.SetOverrideSampleSettings("WebGL", s);
+            // Unity 2022.3 AudioImporter has no "WebGL" platform override:
+            // SetOverrideSampleSettings("WebGL", ...) returns false and writes
+            // nothing, while Standalone/iPhone/Android/console names are accepted.
+            // A WebGL build therefore imports from defaultSampleSettings, so that
+            // is what this tool writes.
+            importer.defaultSampleSettings = s;
             importer.forceToMono = f[6].Trim() == "1";
             importer.SaveAndReimport();
+
+            // Re-read from disk: a silent no-op here would otherwise be reported
+            // below as a successful apply.
+            var written = (AssetImporter.GetAtPath(path) as AudioImporter).defaultSampleSettings;
+            if (written.loadType != s.loadType
+                || written.compressionFormat != s.compressionFormat
+                || Mathf.Abs(written.quality - s.quality) > QualityEpsilon)
+            {
+                throw new Exception(string.Format(
+                    "Import settings did not persist for {0}: wanted load={1} fmt={2} q={3:F2}, "
+                    + "got load={4} fmt={5} q={6:F2}",
+                    path, s.loadType, s.compressionFormat, s.quality,
+                    written.loadType, written.compressionFormat, written.quality));
+            }
 
             Console.WriteLine(string.Format(
                 "[AudioRules] {0} -> load={1} fmt={2} q={3:F2} sr={4}/{5} mono={6}",
