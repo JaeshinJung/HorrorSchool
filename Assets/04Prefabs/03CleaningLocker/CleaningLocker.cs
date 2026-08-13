@@ -41,7 +41,7 @@ public class CleaningLocker : MonoBehaviour, IInteractable
 
     public string GetInteractPrompt()
     {
-        return hasInteracted ? "" : "F로 조사하기";
+        return hasInteracted ? "" : "F\ub85c \uc870\uc0ac\ud558\uae30";
     }
 
     public void Interact()

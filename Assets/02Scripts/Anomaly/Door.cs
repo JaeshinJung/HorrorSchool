@@ -20,12 +20,12 @@ public class Door : MonoBehaviour, IInteractable
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
-            Debug.Log("Door.cs - AudioSource 참조 실패");
+            Debug.Log("Door.cs - AudioSource \ucc38\uc870 \uc2e4\ud328");
         }
         animator = GetComponent<Animator>();
         if (animator == null)
         {
-            Debug.Log("Door.cs - Animator 참조 실패");
+            Debug.Log("Door.cs - Animator \ucc38\uc870 \uc2e4\ud328");
         }
     }
 
@@ -35,7 +35,7 @@ public class Door : MonoBehaviour, IInteractable
         isOpen = !isOpen; // 열림/닫힘 상태를 토글
         animator.SetBool(IsOpenHash, isOpen);
 
-        Debug.Log(isOpen ? $"문이 열렸습니다. {isOpen}" : $"문이 닫혔습니다.{isOpen}");
+        Debug.Log(isOpen ? $"\ubb38\uc774 \uc5f4\ub838\uc2b5\ub2c8\ub2e4. {isOpen}" : $"\ubb38\uc774 \ub2eb\ud614\uc2b5\ub2c8\ub2e4.{isOpen}");
 
         if (isOpen)
         {
@@ -50,7 +50,7 @@ public class Door : MonoBehaviour, IInteractable
     // 문을 바라봤을 때 표시될 텍스트를 상태에 맞게 변경
     public string GetInteractPrompt()
     {
-        return isOpen ? "문 닫기" : "문 열기";
+        return isOpen ? "\ubb38 \ub2eb\uae30" : "\ubb38 \uc5f4\uae30";
     }
 
     public void Close()
@@ -60,7 +60,7 @@ public class Door : MonoBehaviour, IInteractable
         {
             isOpen = false;
             animator.SetBool(IsOpenHash, isOpen);
-            Debug.Log("문이 외부에서 닫혔습니다.");
+            Debug.Log("\ubb38\uc774 \uc678\ubd80\uc5d0\uc11c \ub2eb\ud614\uc2b5\ub2c8\ub2e4.");
         }
     }
 }

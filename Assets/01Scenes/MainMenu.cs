@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
     public void QuitGame()
     {
         // 에디터에서는 작동하지 않지만, 빌드된 게임에서는 종료됩니다.
-        Debug.Log("게임을 종료합니다.");
+        Debug.Log("\uac8c\uc784\uc744 \uc885\ub8cc\ud569\ub2c8\ub2e4.");
         Application.Quit();
     }
 }

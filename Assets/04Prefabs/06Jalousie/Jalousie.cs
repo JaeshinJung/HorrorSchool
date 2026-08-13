@@ -42,7 +42,7 @@ public class Jalousie : MonoBehaviour, IInteractable
 
     public string GetInteractPrompt()
     {
-        return hasInteracted ? "" : "창밖을 본다";
+        return hasInteracted ? "" : "\ucc3d\ubc16\uc744 \ubcf8\ub2e4";
     }
 
     public void Interact()

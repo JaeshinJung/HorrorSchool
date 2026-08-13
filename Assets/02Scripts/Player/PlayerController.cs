@@ -46,24 +46,24 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         if (controller == null)
         {
-            Debug.Log("Debug Log - PlayerController.cs / Awake() / controller 참조 실패");
+            Debug.Log("Debug Log - PlayerController.cs / Awake() / controller \ucc38\uc870 \uc2e4\ud328");
         }
         animator = GetComponent<PlayerAnimator>();
         if (animator == null)
         {
-            Debug.Log("Debug Log - PlayerController.cs / Awake() / animator 참조 실패");
+            Debug.Log("Debug Log - PlayerController.cs / Awake() / animator \ucc38\uc870 \uc2e4\ud328");
         }
 
         keyboardHandler = new KeyboardInput();
         if (keyboardHandler == null)
         {
-            Debug.Log("Debug Log - PlayerController.cs / Awake() / keyboardHandler 참조 실패");
+            Debug.Log("Debug Log - PlayerController.cs / Awake() / keyboardHandler \ucc38\uc870 \uc2e4\ud328");
         }
 
         mouseHandler = new MouseInput();
         if (mouseHandler == null)
         {
-            Debug.Log("Debug Log - PlayerController.cs / Awake() / mouseHandler 참조 실패");
+            Debug.Log("Debug Log - PlayerController.cs / Awake() / mouseHandler \ucc38\uc870 \uc2e4\ud328");
         }
 
         // 상호작용 UI꺼져있는지 확인

@@ -63,11 +63,11 @@ public class GameManager : Singleton<GameManager>
         {
             // 만약 이상현상을 발생시킨다면, 9개의 이상현상중 하나 랜덤 선택
             anomalyIndex = Random.Range(0, anomalies.Length);
-            Debug.Log($"이상 현상 발생! ({anomalies[anomalyIndex].anomalyPrefab.name})");
+            Debug.Log($"\uc774\uc0c1 \ud604\uc0c1 \ubc1c\uc0dd! ({anomalies[anomalyIndex].anomalyPrefab.name})");
         }
         else
         {
-            Debug.Log("이상 현상 없음. 평범한 상태.");
+            Debug.Log("\uc774\uc0c1 \ud604\uc0c1 \uc5c6\uc74c. \ud3c9\ubc94\ud55c \uc0c1\ud0dc.");
         }
 
         // 모든 스폰 포인트에 오브젝트 생성
@@ -114,17 +114,17 @@ public class GameManager : Singleton<GameManager>
         if (correctChoice)
         {
             currentStreak++;
-            Debug.Log($"정답! 현재 {currentStreak}회 연속 성공");
+            Debug.Log($"\uc815\ub2f5! \ud604\uc7ac {currentStreak}\ud68c \uc5f0\uc18d \uc131\uacf5");
         }
         else
         {
             currentStreak = 0;
-            Debug.Log("오답! 기록이 초기화됩니다.");
+            Debug.Log("\uc624\ub2f5! \uae30\ub85d\uc774 \ucd08\uae30\ud654\ub429\ub2c8\ub2e4.");
         }
 
         if (currentStreak >= winCondition)
         {
-            Debug.Log("탈출 성공! 게임 클리어!");
+            Debug.Log("\ud0c8\ucd9c \uc131\uacf5! \uac8c\uc784 \ud074\ub9ac\uc5b4!");
             this.enabled = false;
             return;
         }

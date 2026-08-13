@@ -12,7 +12,7 @@ public class PlayerAnimator : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         if (animator == null)
         {
-            Debug.Log("PlayerAnimator - Awake() - animator 참조 실패");
+            Debug.Log("PlayerAnimator - Awake() - animator \ucc38\uc870 \uc2e4\ud328");
         }
     }
 

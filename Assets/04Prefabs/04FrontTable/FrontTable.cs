@@ -38,7 +38,7 @@ public class FrontTable : MonoBehaviour, IInteractable
 
     public string GetInteractPrompt()
     {
-        return hasInteracted ? "" : "살펴보기";
+        return hasInteracted ? "" : "\uc0b4\ud3b4\ubcf4\uae30";
     }
 
     public void Interact()

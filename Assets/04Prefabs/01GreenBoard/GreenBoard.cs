@@ -54,7 +54,7 @@ public class GreenBoard : MonoBehaviour, IInteractable
     public string GetInteractPrompt()
     {
         // 아직 상호작용 하지 않았다면 안내 문구 반환
-        return hasInteracted ? "" : "F키로 상호작용";
+        return hasInteracted ? "" : "F\ud0a4\ub85c \uc0c1\ud638\uc791\uc6a9";
     }
 
     public void Interact()
